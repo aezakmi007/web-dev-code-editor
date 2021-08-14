@@ -4,25 +4,24 @@ import Editor from "./Components/Editor";
 
 function App() {
   return (
-    <div className="ui three column grid App">
-      <div className="row">
-        <div className="column">
+    <>
+      <div className="editor-container pane">
+        <div className="editor-container">
           {" "}
           <Editor />
         </div>
-        <div className="column">
+        <div className="editor-container">
           {" "}
           <Editor />
         </div>
-        <div className="column">
+        <div className="editor-container">
           <Editor />
         </div>
       </div>
-
-      <div className="row">
-        <Iframe></Iframe>
+      <div>
+        <Iframe className="pane" width="100%" height="100%"></Iframe>
       </div>
-    </div>
+    </>
   );
 }
 
