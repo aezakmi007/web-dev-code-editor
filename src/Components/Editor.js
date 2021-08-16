@@ -8,20 +8,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCompressAlt, faExpandAlt } from "@fortawesome/free-solid-svg-icons";
 import { Controlled as CodeMirror } from "react-codemirror2";
 
-function Editor() {
+function Editor({ language, displayName, value, onChange }) {
+  const handleChange = (editor, data, value) => {
+    onChange(value);
+  };
   return (
     <div className="editor-holder">
       <div className="title-container">
-        HTML
+        {displayName}
         <button type="button" className="expand-collapse-btn">
           <FontAwesomeIcon icon={faCompressAlt} />
         </button>
       </div>
       <CodeMirror
         className="code-mirror-wrapper"
-        value={"Hi There"}
+        onBeforeChange={handleChange}
+        value={value}
         options={{
           theme: "material",
+          mode: { language },
+          lineWrapping: true,
+          lint: true,
+          lineNumbers: true,
         }}
       />
     </div>
