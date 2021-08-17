@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "codemirror/mode/xml/xml";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/css/css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCompressAlt, faExpandAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCompressAlt } from "@fortawesome/free-solid-svg-icons";
 import { Controlled as CodeMirror } from "react-codemirror2";
 
 function Editor({ language, displayName, value, onChange }) {

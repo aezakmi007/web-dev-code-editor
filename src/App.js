@@ -1,39 +1,13 @@
 import "./App.css";
-import Iframe from "react-iframe";
 import Editor from "./Components/Editor";
+import { connect } from "react-redux";
+import { changeHtml } from "./Actions";
+import { changeCss } from "./Actions";
+import { changeJs } from "./Actions";
 import { useEffect, useState } from "react";
 
-function App() {
-  const [html, setHtml] = useState(
-    localStorage.getItem("html")
-      ? JSON.parse(localStorage.getItem("html"))
-      : localStorage.setItem("html", "")
-  );
-  const [css, setCSS] = useState(
-    localStorage.getItem("css")
-      ? JSON.parse(localStorage.getItem("css"))
-      : localStorage.setItem("css", "")
-  );
-  const [js, setJs] = useState(
-    localStorage.getItem("js")
-      ? JSON.parse(localStorage.getItem("js"))
-      : localStorage.setItem("js", "")
-  );
+export const App = ({ html, css, js, changeCss, changeHtml, changeJs }) => {
   const [src, setSrcDoc] = useState("");
-
-  const handleHtmlChange = (value) => {
-    setHtml(value);
-    localStorage.setItem("html", JSON.stringify(value));
-  };
-  const handleCssChange = (value) => {
-    setCSS(value);
-    localStorage.setItem("css", JSON.stringify(value));
-  };
-  const handleJsChange = (value) => {
-    setJs(value);
-    localStorage.setItem("js", JSON.stringify(value));
-  };
-
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setSrcDoc(`
@@ -57,7 +31,7 @@ function App() {
             language="html"
             displayName="HTML"
             value={html}
-            onChange={handleHtmlChange}
+            onChange={changeHtml}
           />
         </div>
         <div className="editor-container">
@@ -65,7 +39,7 @@ function App() {
             language="css"
             displayName="CSS"
             value={css}
-            onChange={handleCssChange}
+            onChange={changeCss}
           />
         </div>
         <div className="editor-container">
@@ -73,15 +47,31 @@ function App() {
             language="js"
             displayName="JS"
             value={js}
-            onChange={handleJsChange}
+            onChange={changeJs}
           />
         </div>
       </div>
       <div>
-        <iframe srcDoc={src} className="pane" width="100%" height="100%" />
+        <iframe
+          srcDoc={src}
+          title="Output"
+          className="pane"
+          width="100%"
+          height="100%"
+        />
       </div>
     </>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    html: state.html,
+    css: state.css,
+    js: state.js,
+  };
+};
+
+export default connect(mapStateToProps, { changeCss, changeHtml, changeJs })(
+  App
+);

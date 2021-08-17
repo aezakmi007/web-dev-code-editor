@@ -14,7 +14,9 @@
     "react-codemirror2": "^7.2.1",
     "react-dom": "^17.0.2",
     "react-iframe": "^1.8.0",
+    "react-redux": "^7.2.4",
     "react-scripts": "4.0.3",
+    "redux": "^4.1.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
