@@ -25,41 +25,31 @@ export const App = ({ html, css, js, changeCss, changeHtml, changeJs }) => {
 
   return (
     <>
-      <div className="editor-container pane">
-        <div className="editor-container">
-          <Editor
-            language="html"
-            displayName="HTML"
-            value={html}
-            onChange={changeHtml}
-          />
-        </div>
-        <div className="editor-container">
-          <Editor
-            language="css"
-            displayName="CSS"
-            value={css}
-            onChange={changeCss}
-          />
-        </div>
-        <div className="editor-container">
-          <Editor
-            language="js"
-            displayName="JS"
-            value={js}
-            onChange={changeJs}
-          />
-        </div>
-      </div>
-      <div>
-        <iframe
-          srcDoc={src}
-          title="Output"
-          className="pane"
-          width="100%"
-          height="100%"
+      <div className="top-pane pane">
+        <Editor
+          language="html"
+          displayName="HTML"
+          value={html}
+          onChange={changeHtml}
         />
+
+        <Editor
+          language="css"
+          displayName="CSS"
+          value={css}
+          onChange={changeCss}
+        />
+
+        <Editor language="js" displayName="JS" value={js} onChange={changeJs} />
       </div>
+
+      <iframe
+        srcDoc={src}
+        title="Output"
+        className="pane"
+        width="100%"
+        height="100%"
+      />
     </>
   );
 };

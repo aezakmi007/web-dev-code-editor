@@ -1,23 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "codemirror/mode/xml/xml";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/css/css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCompressAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCompressAlt, faExpandAlt } from "@fortawesome/free-solid-svg-icons";
 import { Controlled as CodeMirror } from "react-codemirror2";
 
 function Editor({ language, displayName, value, onChange }) {
+  const [open, setOpen] = useState(true);
+
   const handleChange = (editor, data, value) => {
     onChange(value);
   };
   return (
-    <div className="editor-holder">
+    <div className={`editor-container ${open ? "" : "collapsed"}`}>
       <div className="title-container">
         {displayName}
-        <button type="button" className="expand-collapse-btn">
-          <FontAwesomeIcon icon={faCompressAlt} />
+        <button
+          onClick={() => setOpen((prev) => !prev)}
+          type="button"
+          className="expand-collapse-btn"
+        >
+          <FontAwesomeIcon icon={open ? faCompressAlt : faExpandAlt} />
         </button>
       </div>
       <CodeMirror
